@@ -1,0 +1,9 @@
+.idea
+composer.lock
+vendor
+logs/**/*
+app/nut
+app/cache
+app/database
+app/config/*.yml
+public/**/*

@@ -1,0 +1,27 @@
+nginx:
+    image: nginx
+    ports:
+        - "8080:80"
+    volumes:
+        - ./:/var/www/html
+        - ./docker/nginx/nginx.conf:/nginx.conf
+        - ./logs/nginx:/var/log/nginx
+    links:
+        - php:php
+    command: nginx -c /nginx.conf
+
+php:
+    build: ./docker/php
+    ports:
+        - "9000:9000"
+    links:
+      - db:db
+    volumes:
+        - ./:/var/www/html
+db:
+  image: mysql
+  environment:
+    MYSQL_DATABASE: db
+    MYSQL_ROOT_PASSWORD: docker
+  volumes:
+    - .:/data
